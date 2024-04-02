@@ -1,0 +1,9 @@
+@keyframes moveCar {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(100px); }
+    100% { transform: translateX(0); }
+}
+
+.car-moving {
+    animation: moveCar 2s infinite;
+}
