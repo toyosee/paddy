@@ -10,12 +10,12 @@
         <div class="col-md-9">
             <div class="container">
                 <div class="card bg-light">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="card-title mb-0">
+                            <strong><i class="fas fa-car"></i> Add Car</strong>
+                        </h5>
+                    </div>
                     <div class="card-body">
-                    <div class="card-header bg-primary text-white">
-                    <h5 class="card-title">
-                        <strong>Add Car</strong>
-                    </h5>    
-                        </div>
                         <form method="POST" action="{{ route('rides.store') }}">
                             @csrf
                             <div class="form-group">
@@ -34,9 +34,9 @@
                                 <label for="capacity">Capacity</label>
                                 <input type="number" name="capacity" class="form-control" required>
                             </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary">Create</button>
-                                <a href="{{ route('rides.index') }}" class="btn btn-secondary">Back</a>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info"><i class="fas fa-plus"></i> Create</button>
+                                <a href="{{ route('rides.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
                             </div>
                         </form>
                     </div>

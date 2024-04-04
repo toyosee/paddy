@@ -10,6 +10,15 @@ class FriendRequestController extends Controller
 {
     public function send(Request $request)
     {
+
+        // handle sending request to self
+        $senderId = auth()->id();
+        $recipientId = $request->recipient_id;
+    
+        // Check if sender and recipient IDs are the same
+        if ($senderId === $recipientId) {
+            return redirect()->back()->with('success', 'You cannot send a friend request to yourself.');
+        }
         // dd($request->all());
         $validatedData = $request->validate([
             'receiver_id' => 'required|exists:users,id',

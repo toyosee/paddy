@@ -36,109 +36,120 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('storage/farmer.png') }}" alt="Profile Image" class="card-img-top" style="border-radius:50px;">
+                        <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('storage/farmer.png') }}" alt="Profile Image" class="card-img-top rounded-circle" style="width: 200px;">
                         <div class="card-body">
-                            <strong class="card-title">{{ Auth::user()->name }}</strong>
+                            <strong class="card-title text-info">{{ Auth::user()->name }}</strong>
                             <p class="card-text">{{ Auth::user()->email }}</p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-8">
-                    <div class="card bg-light">
+                    <div class="card shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title"><strong>Car Details - You Have:</strong></h5>
-                            <p class="text-center mb-4">
-                                <strong style="font-size: 8rem; color:blue;">{{ $numberOfRides }}</strong>car(s)
+                            <h5 class="card-title text-info"><strong><i class="fas fa-car"></i> Car Details - You Have:</strong></h5>
+                            <p class="text-center text-info mb-4">
+                                <strong style="font-size: 4rem;">{{ $numberOfRides }}</strong> <span class="text-muted"><i class="fas fa-car"></i></span>
                             </p>
-                            <div class="d-flex flex-wrap">
+                            <div class="d-flex flex-wrap justify-content-center">
                                 @foreach ($rides as $ride)
-                                    <span class="badge badge-success mr-2 mb-2">{{ $ride->ride_name }}</span>
+                                    <span class="badge badge-info mr-2 mb-2">{{ $ride->ride_name }}</span>
                                 @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> <br>
-                       <!-- Post creation section -->
-                       <div class="row">
-                        <div class="col-md-4">
-                        <div class="card bg-light">
+            </div>
+            
+            <!-- Post creation section -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-light">
                         <div class="card-body">
-                            <h5 class="card-title"><strong>Profile Details</strong></h5>
+                            <h5 class="card-title text-primary"><strong class="text-info"><i class="fas fa-user-circle"></i> Profile Details</strong></h5>
                             <p class="card-text">{{ Auth::user()->description }}</p>
                         </div>
-                    </div><br>
-                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-8">
-                    <div class="card mb-4">
-                        <div class="card-body bg-dark text-light">
-                            <h5 class="card-title">Shout Out...</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-info"><strong>Shout Out...</strong></h5>
                             <form action="{{ route('posts.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="postContent"></label>
                                     <textarea class="form-control" id="postContent" name="content" rows="3"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Shout</button>
-                            </form><br>
+                                <button type="submit" class="btn btn-info"><i class="fas fa-bullhorn"></i> Shout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div> <br>
-
-            <!-- Display posts section -->
+            </div>
+            
+            <!-- Display Cars section -->
             <div class="row">
                 <div class="col-md-4">
-
-                </div>
-                <div class="col-md-8">
-                    <h5>Your Shoutouts</h5>
-                    @foreach ($posts as $post)
-                    @if ($post->user_id === auth()->id() || auth()->user()->isFriend($post->user))
+                    <h5 class="text-info text-center"><i class="fas fa-car"></i> Your Cars</h5>
+                    @foreach ($rides as $ride)
                         <div class="card mb-3">
                             <div class="card-body bg-light">
-                                <h5 class="card-title">{{ $post->title }}</h5>
-                                <p class="card-text">{{ $post->content }}</p>
-                                <h6 class="comment-info"><strong><em>{{ $post->user->name }} - {{ $post->created_at->format('M d, Y h:i A') }}</em></strong></h6>
-                                <!-- <div class="post-actions">
-                    @if(Auth::id() === $post->user_id) -->
-                        <!-- Edit button -->
-                        <!-- <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a> -->
-                        <!-- Delete button -->
-                        <!-- <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                        </form>
-                    @endif
-                </div> -->
-            <hr>
-            <h6 class="comment-toggle">Responses<i class="fas fa-chevron-down"></i></h6>
-            <!-- Display comments for the post -->
-            <div class="comments" style="display: none;">
-                @foreach ($post->comments as $comment)
-                    <p>{{ $comment->content }}</p>
-                    <p class="comment-info"><strong>
-                        <em>{{ $comment->user->name }} - {{ $comment->created_at->format('M d, Y h:i A') }}</em>
-                    </strong></p>
-                @endforeach
-                <!-- Form for adding comments -->
-                <form class="comment-form" action="{{ route('comments.add', $post->id) }}" method="POST" style="display: none;">
-                    @csrf
-                    <div class="form-group">
-                        <label for="commentContent"></label>
-                        <textarea class="form-control" id="commentContent" name="content" rows="2"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Respond</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    @endif
-@endforeach
+                                <h6 class="card-title text-info">
+                                    <a data-toggle="collapse" href="#collapseCar{{ $loop->iteration }}" role="button" aria-expanded="false" aria-controls="collapseCar{{ $loop->iteration }}" class="car-link">
+                                        {{ $ride->ride_name }}
+                                        <i class="fas fa-chevron-circle-down"></i>
+                                    </a>
+                                </h6>
+                                <div class="collapse" id="collapseCar{{ $loop->iteration }}">
+                                    <p><strong><i class="fas fa-car-side"></i> Car Type:</strong> {{ $ride->ride_type }}</p>
+                                    <p><strong><i class="fas fa-info-circle"></i> Details:</strong> {{ $ride->details }}</p>
+                                    <p><strong><i class="fas fa-users"></i> Capacity:</strong> {{ $ride->capacity }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="col-md-8">
+                    <h5 class="text-info font-weight-bold">Your Shoutouts</h5>
+                    @foreach ($posts as $post)
+                        @if ($post->user_id === auth()->id() || auth()->user()->isFriend($post->user))
+                            <div class="card mb-3">
+                                <div class="card-body bg-dark text-light">
+                                    <h5 class="card-title">{{ $post->title }}</h5>
+                                    <p class="card-text">{{ $post->content }}</p>
+                                    <h6 class="comment-info"><strong><em>{{ $post->user->name }} - {{ $post->created_at->format('M d, Y h:i A') }}</em></strong></h6>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-8">
+                                            <!-- Space for response floated to the right -->
+                                            <h6 class="comment-toggle">Responses<i class="fas fa-chevron-down"></i></h6>
+                                            <!-- Display comments for the post -->
+                                            <div class="comments" style="display: none;">
+                                                @foreach ($post->comments as $comment)
+                                                    <p>{{ $comment->content }}</p>
+                                                    <p class="comment-info"><strong><em>{{ $comment->user->name }} - {{ $comment->created_at->format('M d, Y h:i A') }}</em></strong></p>
+                                                @endforeach
+                                                <!-- Form for adding comments -->
+                                                <form class="comment-form" action="{{ route('comments.add', $post->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="commentContent"></label>
+                                                        <textarea class="form-control" id="commentContent" name="content" rows="2"></textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Respond</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
-
         </div>
     </div>
 </div>

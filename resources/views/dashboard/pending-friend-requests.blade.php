@@ -15,7 +15,7 @@
                             </div>
                             @endif
                 <div class="card">
-                    <div class="card-header bg-primary text-light">
+                    <div class="card-header bg-info text-light">
                         <h5 class="card-title"><strong>Pending Friend Requests</strong></h5>
                     </div>
                     <div class="card-body">
@@ -32,7 +32,7 @@
                 <form action="{{ route('friend-requests.accept', $request->id) }}" method="POST" class="d-inline">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-success">Accept</button>
+                    <button type="submit" class="btn btn-info">Accept</button>
                 </form>
                 <form action="{{ route('friend-requests.reject', $request->id) }}" method="POST" class="d-inline">
                     @csrf

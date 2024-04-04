@@ -107,6 +107,12 @@ class DashboardController extends Controller
                 $query = $request->input('query');
                 $users = User::where('name', 'like', "%$query%")->get();
 
+                // Exclude the logged-in user from the search results
+            $query = $request->input('query');
+            $users = User::where('id', '!=', auth()->id()) // Exclude the logged-in user
+                ->where('name', 'like', "%$query%")
+                ->get();
+
                 return view('dashboard.search-results', compact('users', 'query','pendingFriendRequests', 'pendingFriendRequestsCount'));
             }
 

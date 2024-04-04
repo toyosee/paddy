@@ -10,8 +10,8 @@
         <div class="col-md-9">
             <div class="container">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="card-title"><strong>Edit Car Information</strong></h5>
+                    <div class="card-header bg-info text-white">
+                        <h5 class="card-title mb-0"><strong><i class="fas fa-car"></i> Edit Car Information</strong></h5>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('rides.update', $ride->id) }}">
@@ -33,9 +33,9 @@
                                 <label for="capacity">Capacity</label>
                                 <input type="number" name="capacity" class="form-control" value="{{ $ride->capacity }}" required>
                             </div>
-                            <div>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="{{ route('rides.index') }}" class="btn btn-secondary">Back</a>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Update</button>
+                                <a href="{{ route('rides.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
                             </div>
                         </form>
                     </div>

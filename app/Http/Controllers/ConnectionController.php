@@ -70,6 +70,8 @@ class ConnectionController extends Controller
         $pendingFriendRequestsCount = $pendingFriendRequests->count();
         $user = auth()->user(); // Assuming you're using authentication
         $friends = $user->friends;
+        // Count the number of friends
+        $friendCount = $friends->count();
 
             // Retrieve accepted friend requests where the receiver ID matches the authenticated user's ID
         $acceptedRequests = FriendRequest::where('receiver_id', $user->id)
@@ -81,7 +83,7 @@ class ConnectionController extends Controller
         return $request->sender;
         });
 
-            return view('friends.index', compact('friends', 'pendingFriendRequests', 'pendingFriendRequestsCount', 'friends'));
+            return view('friends.index', compact('friends', 'pendingFriendRequests', 'pendingFriendRequestsCount', 'friends', 'friendCount'));
         }
 
     public function reject(Connection $connection)

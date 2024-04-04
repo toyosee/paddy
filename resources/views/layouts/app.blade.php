@@ -12,6 +12,29 @@
     <!-- Custom CSS for dark navbar -->
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
     <style>
+        /* Clear default margins and paddings on all tags */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Optional: Add specific styles for div elements */
+        div {
+            margin: 0;
+            padding: 0;
+        }
+
+        .car-link {
+            color: inherit; /* Use the parent's color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .car-link:hover {
+            color: inherit; /* Use the parent's color */
+            text-decoration: none; /* Remove underline on hover */
+        }
+
         @keyframes moveCar {
     0% { transform: translateX(0); }
     50% { transform: translateX(100px); }
@@ -74,11 +97,16 @@
 
                 @guest
                 <li class="nav-item {{ Request::is('login') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link" href="{{ route('login') }}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
                 </li>
                 <li class="nav-item {{ Request::is('register') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link" href="{{ route('register') }}">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
                 </li>
+
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,11 +141,18 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // for car movement on load
         $(document).ready(function() {
-            $('#car-icon').hover(function() {
-                $(this).toggleClass('car-moving');
-            });
+    // Trigger the toggleClass() function after the document has loaded
+            $('#car-icon').toggleClass('car-moving');
         });
+
+        // on hover
+        // $(document).ready(function() {
+        //     $('#car-icon').hover(function() {
+        //         $(this).toggleClass('car-moving');
+        //     });
+        // });
         // for comment drop down
         $('.comment-toggle').click(function() {
             $(this).next('.comments').toggle();
