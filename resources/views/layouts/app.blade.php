@@ -75,7 +75,7 @@
                 <li class="nav-item">
                 <form action="{{ route('users.search') }}" method="GET" class="form-inline ml-auto mr-5">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control" placeholder="Search users by name" aria-label="Search" aria-describedby="search-icon">
+                        <input type="text" name="query" class="form-control" placeholder="Search Friends" aria-label="Search" aria-describedby="search-icon">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit" id="search-icon">
                                 <i class="fas fa-search"></i>
