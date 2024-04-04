@@ -9,6 +9,11 @@
             @include('layouts.sidebar')
 
             <div class="col-md-8">
+            @if(session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                 <div class="card">
                     <div class="card-header bg-primary text-light">
                         <h5 class="card-title"><strong>Pending Friend Requests</strong></h5>

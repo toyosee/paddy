@@ -16,11 +16,14 @@ class FriendRequestController extends Controller
         ]);
 
 
-            // Check if there is an existing pending friend request
-        $existingRequest = FriendRequest::where('sender_id', Auth::id())
-        ->where('receiver_id', $validatedData['receiver_id'])
-        ->where('status', 'pending')
-        ->first();
+        // Check if there is an existing friend request from either the sender or receiver
+        $existingRequest = FriendRequest::where(function ($query) use ($request) {
+            $query->where('sender_id', Auth::id())
+                ->where('receiver_id', $request->receiver_id);
+        })->orWhere(function ($query) use ($request) {
+            $query->where('sender_id', $request->receiver_id)
+                ->where('receiver_id', Auth::id());
+        })->whereIn('status', ['pending', 'accepted'])->first();
 
             // If an existing pending request is found, display an error message
         if ($existingRequest) {
