@@ -30,6 +30,45 @@ class User extends Authenticatable
         return $this->belongsToMany(Ride::class);
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function sentFriendRequests()
+    {
+        return $this->hasMany(FriendRequest::class, 'sender_id');
+    }
+
+    public function receivedFriendRequests()
+    {
+        return $this->hasMany(FriendRequest::class, 'receiver_id');
+    }
+
+    public function connections()
+    {
+        return $this->belongsToMany(User::class, 'connections', 'user1_id', 'user2_id');
+    }
+
+    // Checking for friends based on status
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friend_requests', 'sender_id', 'receiver_id')
+            ->wherePivot('status', 'accepted')
+            ->withPivot('status');
+    }
+
+    // check friendship status
+    public function isFriend(User $user)
+    {
+        return $this->connections()->where('id', $user->id)->exists();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

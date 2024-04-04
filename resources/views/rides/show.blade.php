@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="card bg-light">
                     <div class="card-header bg-primary text-white">
-                        <h5><strong>Ride Details</strong></h5>
+                        <h5><strong>Car Details</strong></h5>
                     </div>
                     <div class="card-body">
                         <!-- <p><strong>ID:</strong> {{ $ride->id }}</p> -->

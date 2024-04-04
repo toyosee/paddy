@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ride;
+use App\Models\FriendRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,17 @@ class RideController extends Controller
     public function index()
     {
         //
+         // Retrieve pending friend requests for the logged-in user
+         $pendingFriendRequests = FriendRequest::where('receiver_id', auth()->id())
+         ->where('status', 'pending')
+         ->with('sender')
+         ->get();
+ 
+         // Count the number of pending friend requests
+        $pendingFriendRequestsCount = $pendingFriendRequests->count();
+        
         $rides = Auth::user()->rides()->get();
-        return view('rides.index', compact('rides'));
+        return view('rides.index', compact('rides', 'pendingFriendRequestsCount'));
     }
 
     /**
@@ -24,7 +34,15 @@ class RideController extends Controller
     public function create()
     {
         //
-        return view('rides.create');
+                 // Retrieve pending friend requests for the logged-in user
+                 $pendingFriendRequests = FriendRequest::where('receiver_id', auth()->id())
+                 ->where('status', 'pending')
+                 ->with('sender')
+                 ->get();
+         
+                 // Count the number of pending friend requests
+                $pendingFriendRequestsCount = $pendingFriendRequests->count();
+        return view('rides.create', compact('pendingFriendRequestsCount'));
     }
 
     /**
@@ -55,8 +73,16 @@ class RideController extends Controller
     public function show(Ride $ride)
     {
         //
+                         // Retrieve pending friend requests for the logged-in user
+                         $pendingFriendRequests = FriendRequest::where('receiver_id', auth()->id())
+                         ->where('status', 'pending')
+                         ->with('sender')
+                         ->get();
+                 
+                         // Count the number of pending friend requests
+                        $pendingFriendRequestsCount = $pendingFriendRequests->count();
         $rides = Auth::user()->rides()->get();
-        return view('rides.show', compact('ride', 'rides'));
+        return view('rides.show', compact('ride', 'rides', 'pendingFriendRequestsCount'));
     }
 
     /**
@@ -65,7 +91,15 @@ class RideController extends Controller
     public function edit(Ride $ride)
     {
         //
-        return view('rides.edit', compact('ride'));
+                         // Retrieve pending friend requests for the logged-in user
+                         $pendingFriendRequests = FriendRequest::where('receiver_id', auth()->id())
+                         ->where('status', 'pending')
+                         ->with('sender')
+                         ->get();
+                 
+                         // Count the number of pending friend requests
+                        $pendingFriendRequestsCount = $pendingFriendRequests->count();
+        return view('rides.edit', compact('ride', 'pendingFriendRequestsCount'));
     }
 
     /**
