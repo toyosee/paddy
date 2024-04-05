@@ -33,7 +33,6 @@
                                         <!-- <th scope="col">ID</th> -->
                                         <th scope="col">Type</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,15 +42,6 @@
                                         <!-- <td>{{ $ride->id }}</td> -->
                                         <td>{{ $ride->ride_type }}</td>
                                         <td>{{ $ride->ride_name }}</td>
-                                        <td>
-                                            <a href="{{ route('rides.show', $ride->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                            <a href="{{ route('rides.edit', $ride->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                            <form action="{{ route('rides.destroy', $ride->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you? This action can not be reversed')"><i class="fas fa-trash-alt"></i> Delete</button>
-                                            </form>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="4" class="hiddenRow">
@@ -59,6 +49,17 @@
                                                 <div class="card card-body">
                                                     <p><strong>Details:</strong> {{ $ride->details }}</p>
                                                     <p><strong>Capacity:</strong> {{ $ride->capacity }}</p>
+                                                    
+                                                    <!-- Move the action buttons here and arrange inline -->
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('rides.show', $ride->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                        <a href="{{ route('rides.edit', $ride->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                        <form action="{{ route('rides.destroy', $ride->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you? This action can not be reversed')"><i class="fas fa-trash-alt"></i> Delete</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>

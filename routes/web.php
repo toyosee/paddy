@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\FriendDashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RideController;
 use App\Http\Controllers\FriendRequestController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConnectionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -49,6 +51,11 @@ Route::delete('/comments/{comment}', [PostController::class, 'deleteComment'])->
 // Profile routes
 Route::get('/profile/edit', [DashboardController::class, 'showProfileForm'])->name('profile.edit');
 Route::post('/profile/update', [DashboardController::class, 'updateProfile'])->name('profile.update');
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+// friend dashboard
+// routes/web.php
+Route::get('/friend-dashboard/{userId}', [FriendDashboardController::class, 'show'])->name('friend.dashboard');
+
 
 // Friend requests
 Route::post('/friend-requests/send', [FriendRequestController::class, 'send'])->name('friend-requests.send');

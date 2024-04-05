@@ -153,13 +153,23 @@
         //         $(this).toggleClass('car-moving');
         //     });
         // });
+
         // for comment drop down
         $('.comment-toggle').click(function() {
             $(this).next('.comments').toggle();
             $(this).next('.comments').find('.comment-form').toggle();
         });
-    </script>
 
+        // Javascript code to get profile image name
+
+    function updateProfileImageLabel() {
+        const input = document.getElementById('profile_image');
+        const label = document.getElementById('profile_image_label');
+        let fileName = input.files[0] ? input.files[0].name : 'Choose file';
+        label.innerText = fileName;
+    }
+
+</script>
     <!-- Include the footer -->
     @include('layouts.footer')
 </body>

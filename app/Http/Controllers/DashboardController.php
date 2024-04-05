@@ -26,8 +26,8 @@ class DashboardController extends Controller
 
         // Retrieve posts for the dashboard
         // $posts = Post::all();
-            // Retrieve only posts belonging to the current user
-        $posts = auth()->user()->posts()->get();
+        // Retrieve only posts belonging to the current user
+        $posts = auth()->user()->posts()->orderBy('created_at', 'desc')->get();
 
         // Retrieve rides for the dashboard
         $rides = auth()->user()->rides()->get();

@@ -11,7 +11,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+            // Fetch posts with comments in descending order of date and time
+        $posts = Post::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('posts.index', compact('posts'));
     }
 

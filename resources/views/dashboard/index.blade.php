@@ -112,7 +112,7 @@
                     @endforeach
                 </div>
                 <div class="col-md-8">
-                    <h5 class="text-info font-weight-bold">Your Shoutouts</h5>
+                    <h5 class="text-info font-weight-bold">Your Shoutouts <i class="fas fa-bullhorn text-info"></i></h5>
                     @foreach ($posts as $post)
                         @if ($post->user_id === auth()->id() || auth()->user()->isFriend($post->user))
                             <div class="card mb-3">
@@ -139,7 +139,7 @@
                                                         <label for="commentContent"></label>
                                                         <textarea class="form-control" id="commentContent" name="content" rows="2"></textarea>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Respond</button>
+                                                    <button type="submit" class="btn btn-info">Respond</button>
                                                 </form>
                                             </div>
                                         </div>

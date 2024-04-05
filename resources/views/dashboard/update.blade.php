@@ -42,8 +42,8 @@
                                 <div class="form-group">
                                     <label for="profile_image"><i class="fas fa-image"></i> Profile Image:</label>
                                     <div class="custom-file">
-                                        <input type="file" name="profile_image" class="custom-file-input" id="profile_image">
-                                        <label class="custom-file-label" for="profile_image">Choose file</label>
+                                        <input type="file" name="profile_image" class="custom-file-input" id="profile_image" onchange="updateProfileImageLabel()">
+                                        <label class="custom-file-label" id="profile_image_label" for="profile_image">Choose file</label>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Update Profile</button>
@@ -61,4 +61,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+
 @endsection

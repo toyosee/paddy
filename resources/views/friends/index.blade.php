@@ -21,7 +21,7 @@
                         <div class="col-md-8">
                             <div class="friend-details" data-toggle="collapse" href="#friend{{ $loop->index }}" role="button" aria-expanded="false" aria-controls="friend{{ $loop->index }}">
                                 <span>{{ $friend->name }}</span>
-                                <i class="fas fa-angle-double-down ml-2"></i>
+                                <i class="fas fa-angle-double-down ml-2 text-info"></i>
                             </div>
                             <div class="collapse" id="friend{{ $loop->index }}">
                                 <div class="card shadow rounded">
@@ -38,7 +38,9 @@
                                         <p class="card-text"><strong>About:</strong> {{ $friend->description }}</p>
                                     </div>
                                     <div class="card-footer">
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View Profile</a>
+                                    <a href="{{ route('friend.dashboard', $friend->id) }}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i> View Profile
+                                    </a>
                                     </div>
                                 </div>
                             </div>
