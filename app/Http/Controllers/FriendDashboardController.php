@@ -20,7 +20,8 @@ class FriendDashboardController extends Controller
      // Count the number of pending friend requests
      $pendingFriendRequestsCount = $pendingFriendRequests->count();
         $user = User::findOrFail($userId);
+        $posts = auth()->user()->posts()->orderBy('created_at', 'desc')->get();
         // Fetch additional data if needed
-        return view('friends.friend-dashboard', compact('user', 'pendingFriendRequests', 'pendingFriendRequestsCount'));
+        return view('friends.friend-dashboard', compact('user','posts', 'pendingFriendRequests', 'pendingFriendRequestsCount'));
     }
 }
